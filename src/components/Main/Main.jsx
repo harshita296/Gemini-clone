@@ -3,9 +3,17 @@ import './Main.css'
 import { assets } from '../../assets/assets'
 import { Context } from '../../context/context'
 
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+recognition.continuous = false;
+recognition.lang = 'en-US';
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+
 const Main = () => {
 
-  const { onSent,
+  const {
+    onSent,
     recentPrompt,
     showResult,
     loading,
@@ -13,6 +21,18 @@ const Main = () => {
     setInput,
     input
   } = useContext(Context);
+
+  const handleMicClick = () => {
+    recognition.start();
+    recognition.onresult = (event) => {
+      const speechResult = event.results[0][0].transcript;
+      setInput(speechResult);
+    };
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+    };
+  };
+
 
 
   return (
@@ -73,10 +93,11 @@ const Main = () => {
           <div className="search-box">
             <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder='Enter a prompt here' />
             <div>
-              <img src={assets.gallery_icon} width={30} alt="" />
-              <img src={assets.mic_icon} width={30} alt="" />
-              {input ? <img onClick={() => onSent()} src={assets.send_icon} width={30} alt="" /> : null}
-            </div>
+  <img src={assets.gallery_icon} width={30} alt="" />
+  <img src={assets.mic_icon} width={30} alt="" onClick={handleMicClick} />
+  {input ? <img onClick={() => onSent()} src={assets.send_icon} width={30} alt="" /> : null}
+</div>
+
           </div>
           <p className="bottom-info">
             Gemini may display inaccurate info, including about people, so double-check its responses. Your privacy and Gemini Apps
