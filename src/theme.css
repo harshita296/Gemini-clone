@@ -1,0 +1,80 @@
+/* 🌞 LIGHT THEME */
+[data-theme='light'] {
+  --bg-color: #f4f6f8;
+  --text-color: #222;
+  --card-bg: #fff;
+  --accent-color: #007bff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* 🌑 DARK (BLACK) THEME */
+[data-theme='dark'] {
+  --bg-color: #0d0d0d;
+  --text-color: #f1f1f1;
+  --card-bg: #1a1a1a;
+  --accent-color: #00aaff;
+  --shadow-color: rgba(0, 0, 0, 0.6);
+}
+
+/* ⚡ NEON THEME */
+[data-theme='neon'] {
+  --bg-color: #05010a;
+  --text-color: #e0eaff;
+  --card-bg: rgba(10, 20, 40, 0.8);
+  --accent-color: #00ffff;
+  --shadow-color: rgba(0, 255, 255, 0.6);
+  background: radial-gradient(circle at top right, #081229, #02010a 70%);
+}
+
+/* ✅ COMMON STYLES (work for all themes) */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* 🧱 Card Styling */
+.card {
+  background: var(--card-bg);
+  box-shadow: 0 2px 6px var(--shadow-color);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* ⚡ Neon-only Effects */
+[data-theme='neon'] .card {
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+[data-theme='neon'] .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme='neon'] .greet p:first-child span {
+  background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
+  background-clip: text;              /* ✅ Standard property for compatibility */
+  -webkit-background-clip: text;      /* ✅ Chrome/Safari/Edge */
+  color: transparent;                 /* ✅ Standard fallback */
+  -webkit-text-fill-color: transparent; /* ✅ Safari/Chrome support */
+  animation: neon-glow 4s linear infinite;
+}
+
+@keyframes neon-glow {
+  0% {
+    filter: drop-shadow(0 0 5px #00ffff);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #ff00ff);
+  }
+  100% {
+    filter: drop-shadow(0 0 5px #00ffff);
+  }
+}
+
+[data-theme='neon'] .search-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}

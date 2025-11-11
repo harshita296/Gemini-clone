@@ -3,6 +3,8 @@ import './Main.css'
 import { assets } from '../../assets/assets'
 import { Context } from '../../Context/Context'
 
+
+
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 recognition.continuous = false;

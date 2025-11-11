@@ -169,3 +169,111 @@
         gap: 5px;
     }
 }
+/* ----------------------
+   THEME-BASED ICON COLORS
+   (append this to the bottom of Main.css)
+   ---------------------- */
+
+/* make transitions smooth for color changes */
+.search-box img,
+.search-box svg,
+.card img,
+.nav img {
+  transition: filter 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* DEFAULT (Light theme) - icons visible as dark/gray */
+[data-theme="light"] .search-box img,
+[data-theme="light"] .search-box svg,
+[data-theme="light"] .card img,
+[data-theme="light"] .nav img {
+  filter: none;
+  opacity: 0.95;
+}
+
+/* DARK theme - invert icons to white so they are visible on dark bg */
+[data-theme="dark"] .search-box img,
+[data-theme="dark"] .search-box svg,
+[data-theme="dark"] .card img,
+[data-theme="dark"] .nav img {
+  filter: invert(1) grayscale(0) contrast(120%);
+  opacity: 0.95;
+}
+
+/* NEON theme - bright cyan/teal tint for icons + subtle glow */
+[data-theme="neon"] .search-box img,
+[data-theme="neon"] .search-box svg,
+[data-theme="neon"] .card img,
+[data-theme="neon"] .nav img {
+  /* tune this filter for a cyan/teal tint */
+  filter: brightness(0) saturate(100%) invert(75%) sepia(20%) saturate(600%) hue-rotate(150deg) contrast(105%);
+  opacity: 1;
+  /* small glowing effect (doesn't change layout) */
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.12);
+  border-radius: 50%;
+}
+
+/* Optional: subtle hover scale for icons (still preserves layout) */
+.search-box img:hover,
+.search-box svg:hover,
+.card img:hover,
+.nav img:hover {
+  transform: scale(1.05);
+}
+
+/* ----------------------
+   INPUT / SEARCH BOX STYLES PER THEME
+   (keeps element same place; only visual changes)
+   ---------------------- */
+
+/* light: soft neutral */
+[data-theme="light"] .search-box {
+  background-color: #f0f4f9;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+[data-theme="light"] .search-box input {
+  color: #222;
+}
+
+/* dark: darker input with light text */
+[data-theme="dark"] .search-box {
+  background-color: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+[data-theme="dark"] .search-box input {
+  color: #eaeaea;
+}
+
+/* neon: glassy / glowing input */
+[data-theme="neon"] .search-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,255,255,0.12);
+  box-shadow: 0 0 18px rgba(0,255,255,0.10), inset 0 0 8px rgba(0,255,255,0.02);
+}
+[data-theme="neon"] .search-box input {
+  color: #e7f7fb;
+}
+
+/* ensure input caret is visible */
+.search-box input::placeholder { opacity: 0.7 }
+
+/* ----------------------
+   GREET GRADIENT: add standard background-clip property
+   for better cross-browser compatibility (Firefox, etc.)
+   ---------------------- */
+.greet span {
+  background: -webkit-linear-gradient(16deg, #4b90ff, #ff5546);
+  background: linear-gradient(16deg, #4b90ff, #ff5546);
+  -webkit-background-clip: text;
+  background-clip: text;           /* standard property for compatibility */
+  -webkit-text-fill-color: transparent;
+  color: transparent;              /* fallback */
+}
+
+/* ----------------------
+   SMOOTH TRANSITIONS
+   ---------------------- */
+.main,
+.main * {
+  transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
